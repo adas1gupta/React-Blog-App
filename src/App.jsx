@@ -1,12 +1,13 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
+import useBlogs from "./hooks/useBlogs";
 
 function App () {
-    const [blogs, setBlogs] = useState([])
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
     const postsPerPage = 10
+    const { blogs, setBlogs } = useBlogs(page, postsPerPage)
 
     return (
         <div>
