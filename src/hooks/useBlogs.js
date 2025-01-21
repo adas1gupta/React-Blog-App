@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-function useBlogs (page) {
+function useBlogs (page, blogsPerPage) {
     const [blogs, setBlogs] = useState([])
-    const url = `${page}`
+    const url = `http://localhost:5000/blogs?page=${page}&limit=${blogsPerPage}`;
 
     useEffect (() => {
         async function fetchBlogs(url) {
