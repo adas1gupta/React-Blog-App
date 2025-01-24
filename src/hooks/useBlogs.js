@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 function useBlogs (page, blogsPerPage) {
-    const [blogs, setBlogs] = useState([])
     const url = `http://localhost:5000/blogs?page=${page}&limit=${blogsPerPage}`;
 
-    useEffect (() => {
-        async function fetchBlogs(url) {
-            const response = await fetch(url)
-            const data = await response.json()
-            setBlogs([...blogs, data])
-        }
+    async function fetchBlogs(url) {
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+    }
 
-        fetchBlogs(url)
-    },[page])
+    const blogs = useQuery({
+        queryKey: ['pastBlogs', page], //unique identifier for the type of query
+        queryFn: () => fetchBlogs(url)
+    })
 
-    return { blogs, setBlogs }
+    return { blogs }
 }
 
 export default useBlogs
