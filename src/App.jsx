@@ -9,19 +9,17 @@ const queryClient = new QueryClient()
 
 function App () {
     const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(true)
     const postsPerPage = 10
-    const { blogs, setBlogs } = useBlogs(page, postsPerPage)
 
-    
+    const { blogs } = useBlogs(page, postsPerPage)
 
     return (
         <div>
-            {(loading) && (
-                <div>
-                    Loading...
-                </div>
-            )}
+            <ul>
+                {blogs.data.map((blog) => (
+                    <li key={blog.id}>{blog.title}</li>
+                ))}
+            </ul>
         </div>
     )
 }

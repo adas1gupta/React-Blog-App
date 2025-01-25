@@ -11,7 +11,8 @@ function useBlogs (page, blogsPerPage) {
 
     const blogs = useQuery({
         queryKey: ['pastBlogs', page], //unique identifier for the type of query
-        queryFn: () => fetchBlogs(url)
+        queryFn: () => fetchBlogs(url),
+        initialData: []
     })
 
     return { blogs }
