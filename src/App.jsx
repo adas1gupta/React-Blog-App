@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { useState } from "react";
 import useBlogs from "./hooks/useBlogs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Blog from "./hooks/Blog";
+import Blog from "./Blog";
 
 
 const queryClient = new QueryClient()
@@ -13,6 +13,8 @@ function App () {
     const postsPerPage = 10
 
     const { blogs } = useBlogs(page, postsPerPage)
+    const totalBlogs = blogs.blogs.length
+    const totalPages = Math.ceil(totalBlogs / postsPerPage);
 
     return (
         <div>
